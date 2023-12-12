@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOSQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .usuario-info {
+      background-color: #f5f5f5;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+
+  // Dados JSON simulados
+  const usuarios = [];
+
+  // Função para adicionar um novo usuário
+  function adicionarUsuario(usuario) {
+    usuarios.push(usuario);
+    console.log('Usuário adicionado com sucesso!');
+  }
+
+  // Função para exibir todos os usuários
+  function exibirUsuarios() {
+    const divUsuarios = document.createElement('div');
+
+    usuarios.forEach(usuario => {
+      const usuarioInfo = document.createElement('div');
+      usuarioInfo.classList.add('usuario-info');
+
+      usuarioInfo.textContent = JSON.stringify(usuario, null, 2);
+      divUsuarios.appendChild(usuarioInfo);
+    });
+
+    document.body.appendChild(divUsuarios);
+  }
+
+  // Função para coletar informações do usuário através de um formulário
+  function coletarInformacoes() {
+    const form = document.createElement('form');
+    
+    const nomeInput = document.createElement('input');
+    nomeInput.setAttribute('type', 'text');
+    nomeInput.setAttribute('placeholder', 'Nome');
+    
+    const sobrenomeInput = document.createElement('input');
+    sobrenomeInput.setAttribute('type', 'text');
+    sobrenomeInput.setAttribute('placeholder', 'Sobrenome');
+    
+    const idadeInput = document.createElement('input');
+    idadeInput.setAttribute('type', 'number');
+    idadeInput.setAttribute('placeholder', 'Idade');
+    
+    const cursoInput = document.createElement('input');
+    cursoInput.setAttribute('type', 'text');
+    cursoInput.setAttribute('placeholder', 'Curso');
+    
+    const materiaNomeInput = document.createElement('input');
+    materiaNomeInput.setAttribute('type', 'text');
+    materiaNomeInput.setAttribute('placeholder', 'Nome da Matéria');
+    
+    const nota1Input = document.createElement('input');
+    nota1Input.setAttribute('type', 'number');
+    nota1Input.setAttribute('placeholder', 'Nota 1');
+    
+    const nota2Input = document.createElement('input');
+    nota2Input.setAttribute('type', 'number');
+    nota2Input.setAttribute('placeholder', 'Nota 2');
+    
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Adicionar Usuário';
+    
+    // Adiciona um evento de clique ao botão
+    submitButton.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      const novoUsuario = {
+        "nome": nomeInput.value,
+        "sobrenome": sobrenomeInput.value,
+        "idade": parseInt(idadeInput.value),
+        "curso": cursoInput.value,
+        "materias": [
+          {
+            "nome": materiaNomeInput.value,
+            "nota1": parseFloat(nota1Input.value),
+            "nota2": parseFloat(nota2Input.value)
+          }
+        ]
+      };
+
+      adicionarUsuario(novoUsuario);
+      exibirUsuarios();
+
+      // Limpa os campos do formulário após a adição
+      form.reset();
+    });
+
+    // Adiciona os campos e o botão ao formulário
+    form.appendChild(nomeInput);
+    form.appendChild(sobrenomeInput);
+    form.appendChild(idadeInput);
+    form.appendChild(cursoInput);
+    form.appendChild(materiaNomeInput);
+    form.appendChild(nota1Input);
+    form.appendChild(nota2Input);
+    form.appendChild(submitButton);
+
+    // Adiciona o formulário à página
+    document.body.appendChild(form);
+  }
+
+  // Chama a função para coletar informações do usuário através de um formulário
+  coletarInformacoes();
+
+</script>
+
+</body>
+</html>
